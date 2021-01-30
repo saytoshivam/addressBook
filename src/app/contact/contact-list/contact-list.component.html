@@ -1,0 +1,16 @@
+<div *ngIf="contacts.length; else noContacts">
+  <div
+    class="new-contact"
+    *ngFor="let contact of contacts; index as i"
+    [routerLink]="[i]"
+  >
+    <h1>{{ contact.name }}</h1>
+    <p>{{ contact.email }}</p>
+    <p>{{ contact.mobile }}</p>
+  </div>
+</div>
+<ng-template #noContacts>
+  <div class="new-contact">
+    <h1>No Contacts</h1>
+  </div>
+</ng-template>

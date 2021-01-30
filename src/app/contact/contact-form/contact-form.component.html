@@ -1,0 +1,104 @@
+<form
+  [formGroup]="contactForm"
+  class="w-100 ml-3 mb-4 contact-form p-3 mt-3"
+  (ngSubmit)="addNewContact()"
+>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      [class.is-invalid]="
+        contactForm.get('name').invalid && contactForm.get('name').touched
+      "
+      class="form-control w-80"
+      formControlName="name"
+    />
+    <small
+      [class.d-none]="
+        !(contactForm.get('name').invalid && contactForm.get('name').touched)
+      "
+      class="text-danger"
+      >Name is Required</small
+    >
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      class="form-control w-80"
+      [class.is-invalid]="email.invalid && email.touched"
+      formControlName="email"
+    />
+    <div *ngIf="email.invalid && email.touched" class="text-danger">
+      <small *ngIf="email.errors?.required">Email is Required</small>
+      <small *ngIf="email.errors?.pattern">Invalid Email</small>
+    </div>
+  </div>
+  <div class="d-flex w-80 justify-content-between">
+    <div class="form-group w-46">
+      <label for="mobile">Mobile</label>
+      <input
+        type="tel"
+        [class.is-invalid]="mobile.invalid && mobile.touched"
+        class="form-control"
+        name="mobile"
+        formControlName="mobile"
+      />
+      <div *ngIf="mobile.invalid && mobile.touched" class="text-danger">
+        <small *ngIf="mobile.errors?.required">Mobile Number is Required</small>
+        <small *ngIf="mobile.errors?.pattern"
+          >invalid Mobile Number
+          <div></div
+        ></small>
+        <small *ngIf="mobile.errors?.minlength"
+          >minimum digits must be 10</small
+        >
+      </div>
+    </div>
+    <div class="form-group w-46">
+      <label for="landline">Landline</label>
+      <input
+        type="text"
+        class="form-control"
+        name="landline"
+        formControlName="landline"
+      />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="website">Website</label>
+    <input
+      type="text"
+      class="form-control w-80"
+      name="website"
+      formControlName="website"
+    />
+  </div>
+  <div class="form-group">
+    <label for="address">Address</label>
+    <textarea
+      type="text"
+      class="form-control w-80 h-100px"
+      name="address"
+      formControlName="address"
+    ></textarea>
+  </div>
+  <div class="d-flex justify-content-end">
+    <button
+      class="btn"
+      [disabled]="!contactForm.valid"
+      type="submit"
+      *ngIf="!contactId"
+    >
+      Add
+    </button>
+    <button
+      class="btn"
+      [disabled]="!contactForm.valid"
+      type="submit"
+      *ngIf="contactId"
+    >
+      Update
+    </button>
+  </div>
+</form>
